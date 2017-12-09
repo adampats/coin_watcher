@@ -1,0 +1,31 @@
+region: us-west-2
+
+function_name: coin_watcher
+handler: service.handler
+description: Crypto Coin exchange rate monitor
+runtime: python2.7
+# role: lambda_basic_execution
+
+# S3 upload requires appropriate role with s3:PutObject permission
+# (ex. basic_s3_upload), a destination bucket, and the key prefix
+# bucket_name: 'example-bucket'
+# s3_key_prefix: 'path/to/file/'
+
+# if access key and secret are left blank, boto will use the credentials
+# defined in the [default] section of ~/.aws/credentials.
+aws_access_key_id:
+aws_secret_access_key:
+
+# dist_directory: dist
+# timeout: 15
+# memory_size: 512
+#
+
+# Experimental Environment variables
+environment_variables:
+    env_1: foo
+    env_2: baz
+
+# Build options
+build:
+  source_directories: lib # a comma delimited list of directories in your project root that contains source to package.
