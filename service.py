@@ -1,28 +1,32 @@
 #!/usr/bin/env python
 
 import requests
+from IPython import embed
 
 BASE_API_URI = 'https://api.coinmarketcap.com/v1/'
-HEADERS = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+HEADERS = { 'Accept': 'application/json',
+            'Content-Type': 'application/json' }
 
-# Get price stats for individual coin:currency
-# pass arg as string, e.g. "BTC:USD"
-def get_spot_price(currency_pair):
-    coin, fiat = currency_pair.split(':')
-    path = "ticker/" + CURRENCY_MAP[coin] + "/?convert=" + fiat
-    print(BASE_API_URI + path)
-    r = requests.get(BASE_API_URI + path, headers=headers)
-    return r.text
+def get_data():
+    r = requests.get(BASE_API_URI + "ticker", headers=HEADERS)
+    return r.json()
 
 # main
 def handler(event, context):
-    print("Querying...")
-    currency_pairs = event.get('currency_pairs')
+    checks = event.get('checks')
+    alert_email = event.get('alert_email')
 
-    if type(currency_pairs):
-        for pair in currency_pairs:
-            print("Checking", pair, "...")
-            current = get_spot_price(pair)
-            print(current)
+    if checks:
+        print("Querying...")
+        data = get_data()
 
-    print "Done."
+        alerts = []
+        for c in checks:
+            cur = next(item for item in data if item['symbol'] == c['coin'])
+            print( c['coin'], "\n", {k: cur.get(k, None) for k in (
+                'id', 'symbol', 'price_usd', 'price_usd', 'percent_change_1h'
+                'percent_change_24h', 'percent_change_7d', 'last_updated')} )
+    else:
+        print("No checks defined.  Quit.")
+
+    print("Done")

@@ -1,4 +1,17 @@
 {
-  "currency_pairs": ["BTC:USD", "ETH:USD"],
-  "threshold": 5
+  "alert_email": "adampatterson@protonmail.com",
+  "checks": [
+    {
+      "coin": "BTC",
+      "fiat": "USD",
+      "pct_threshold_1h": "5.00",
+      "pct_threshold_24h": "10.00"
+    },
+    {
+      "coin": "ETH",
+      "fiat": "USD",
+      "pct_threshold_1h": "2.50",
+      "pct_threshold_24h": "7.50"
+    }
+  ]
 }
