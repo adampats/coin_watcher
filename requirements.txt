@@ -1,2 +1,3 @@
 python-lambda==2.2.0
 requests==2.18.4
+boto3==1.4.4
