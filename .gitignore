@@ -101,3 +101,5 @@ ENV/
 .mypy_cache/
 
 config.yaml
+terraform/.terraform
+terraform/**.tfstate
