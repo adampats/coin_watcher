@@ -11,6 +11,30 @@
       "fiat": "USD",
       "pct_threshold_1h": "2.50",
       "pct_threshold_24h": "10"
+    },
+    {
+      "coin": "LTC",
+      "fiat": "USD",
+      "pct_threshold_1h": "5.00",
+      "pct_threshold_24h": "10.00"
+    },
+    {
+      "coin": "MIOTA",
+      "fiat": "USD",
+      "pct_threshold_1h": "5.00",
+      "pct_threshold_24h": "10.00"
+    },
+    {
+      "coin": "XRP",
+      "fiat": "USD",
+      "pct_threshold_1h": "5.00",
+      "pct_threshold_24h": "10"
+    },
+    {
+      "coin": "XMR",
+      "fiat": "USD",
+      "pct_threshold_1h": "5.00",
+      "pct_threshold_24h": "10"
     }
   ]
 }
