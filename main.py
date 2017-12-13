@@ -7,8 +7,6 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 
-from IPython import embed
-
 BASE_API_URI = 'https://api.coinmarketcap.com/v1/'
 HEADERS = { 'Accept': 'application/json',
             'Content-Type': 'application/json' }
@@ -61,17 +59,18 @@ def handler(event, context):
             if verbose: print("=", cur['symbol'], "=\n", cur)
 
             if abs(float(cur['percent_change_1h'])) >= float(c['pct_threshold_1h']):
-                cur['reason'] = '1h'
+                cur['coin_watcher_trigger'] = '1h'
                 alerts.append(cur)
                 if verbose: print(cur['symbol'], "1h threshold triggered!")
 
             if abs(float(cur['percent_change_24h'])) >= float(c['pct_threshold_24h']):
-                cur['reason'] = '24h'
+                cur['coin_watcher_trigger'] = '24h'
                 alerts.append(cur)
                 if verbose: print(cur['symbol'], "24h threshold triggered!")
 
         if alerts != []:
-            alert_subject = " - " + alerts[0]['symbol'] + " - " + alerts[0]['reason']
+            alert_subject = " - " + alerts[0]['symbol'] + " - " + \
+                alerts[0]['coin_watcher_trigger']
         sns_msg = json.dumps(alerts, indent=4, sort_keys=True)
         if verbose:
             print("Alerts", alert_subject, "\n", sns_msg)
