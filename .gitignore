@@ -102,4 +102,4 @@ ENV/
 
 config.yaml
 terraform/.terraform
-terraform/**.tfstate
+terraform/*.tfstate*

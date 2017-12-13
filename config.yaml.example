@@ -22,7 +22,7 @@ memory_size: 512
 
 # Experimental Environment variables
 environment_variables:
-    SNS_TOPIC_ARN: 'arn:aws:sns:us-west-2:111111111111:mytopic'
+    SNS_TOPIC_ARN: 'arn:aws:sns:us-west-2:111111111111:coin_watcher_lambda'
 
 # Build options
 build:
