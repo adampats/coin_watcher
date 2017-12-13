@@ -72,17 +72,18 @@ def handler(event, context):
                 alerts.append(cur)
                 if verbose: print(cur['symbol'], "24h threshold triggered!")
 
-        if alerts != []:
+        if alerts == []:
+            print("No alerts - quit")
+        else:
             alert_subject = " - " + alerts[0]['symbol'] + " - " + \
                 alerts[0]['coin_watcher_trigger']
-        sns_msg = json.dumps(alerts, indent=4, sort_keys=True)
-        if verbose:
-            print("Alerts", alert_subject, "\n", sns_msg)
-        if sns_topic_arn == 'local':
-            print("Skipping SNS publish since SNS_TOPIC_ARN environment " + \
-                  "variable is not specified.")
-        else:
-            send_sns(sns_topic_arn, sns_msg, MSG_SUBJECT + alert_subject)
-
+            sns_msg = json.dumps(alerts, indent=4, sort_keys=True)
+            if verbose:
+                print("Alerts", alert_subject, "\n", sns_msg)
+            if sns_topic_arn == 'local':
+                print("Skipping SNS publish since SNS_TOPIC_ARN environment " + \
+                      "variable is not specified.")
+            else:
+                send_sns(sns_topic_arn, sns_msg, MSG_SUBJECT + alert_subject)
     else:
         print("No checks defined.  Quit.")
