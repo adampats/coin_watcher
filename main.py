@@ -28,6 +28,10 @@ def send_sns(topic_arn, msg, subject):
     except ClientError as e:
         if e.response['Error']['Code'] == 'NotFound':
             print("SNS Topic,", topic_arn, "not found.  Message not sent.")
+            raise Exception(e)
+        if e.response['Error']['Code'] == 'AuthorizationError':
+            print("Not authorized to publish to SNS, check IAM policies.")
+            raise Exception(e)
         else:
             print("Unexpected error:", e)
 
